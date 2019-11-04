@@ -46,7 +46,7 @@ class LightUpLED {
         }
     }
 
-    ledP8() {//lights up P3 then fades P3
+    ledP8() {//lights up P8 then fades P8
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P8, i);
@@ -61,7 +61,7 @@ class LightUpLED {
     }
 
 
-    ledP12() {//lights up P4 then fades P4
+    ledP12() {//lights up P12 then fades P12
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P12, i);
@@ -75,7 +75,7 @@ class LightUpLED {
     }
 
 
-    ledP16() {//lights up P10 then fades P10
+    ledP16() {//lights up P16 then fades P16
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P16, i);
@@ -99,11 +99,13 @@ basic.forever(function () {
     //flashes the three leds
     let light = new LightUpLED;
     light.flash();//runs flash function
-    light.ledP8();//runs led3 function
-    light.ledP12();//runs ledP4
-    light.ledP16();//runs ledP10
-    light.ledP16();//runs led10
-    light.ledP12();//runs led4
-    light.ledP8();//runs led3
+    light.ledP8();//runs led8 function
+    light.ledP12();//runs ledP12
+    light.ledP16();//runs ledP16
+    light.ledP16();//runs led16
+    light.ledP12();//runs led12
+    light.ledP8();//runs led8
 })
+
+
 

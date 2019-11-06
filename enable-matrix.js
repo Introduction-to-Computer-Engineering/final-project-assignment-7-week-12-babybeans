@@ -1,5 +1,5 @@
-/*This program flashes the three leds and then each of those
-individual leds slowly light up and then fade out. */
+/*This program flashes the three leds one at a time, then it flashes all of them at once. 
+While they are all flashing at the same time, there is a firework pattern on the display. */
 
 class LightUpLED {
 
@@ -12,7 +12,7 @@ class LightUpLED {
             pins.analogWritePin(AnalogPin.P12, index);
             pins.analogWritePin(AnalogPin.P16, index);
             if (index == 2000) { //displays firework on 5x5 display
-                for (let j = 0; j <= 255; j += 25.5) {
+                for (let j = 0; j <= 255; j += 25.5) {//fades out firework pattern
                     led.plotBrightness(2, 2, j);
                     basic.pause(100);
                     led.plotBrightness(2, 1, j - 50);
@@ -26,14 +26,14 @@ class LightUpLED {
 
         }
 
-        //fades out leds slowly
-        for (let index = 3071; index >= 0; index--) {
+        
+        for (let index = 3071; index >= 0; index--) {//fades out Leds slowly
             basic.clearScreen();
             pins.analogWritePin(AnalogPin.P8, index);
             pins.analogWritePin(AnalogPin.P12, index);
             pins.analogWritePin(AnalogPin.P16, index);
-            if (index == 2000) {
-                for (let j = 255; j >= 0; j -= 25.5) {
+            if (index == 2000) { //starts firework pattern
+                for (let j = 255; j >= 0; j -= 25.5) {//fades out firework battern
                     led.plotBrightness(2, 2, j);
                     basic.pause(100);
                     led.plotBrightness(2, 1, j + 50);
@@ -46,14 +46,14 @@ class LightUpLED {
         }
     }
 
-    ledP8() {//lights up P8 then fades P8
+    ledP8() {//lights up P8
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P8, i);
             control.waitMicros(1000)
 
         }
-        for (let i = 0; i >= 0; i--) {
+        for (let i = 0; i >= 0; i--) {//fades P8
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P8, i);
             control.waitMicros(1000)
@@ -61,13 +61,13 @@ class LightUpLED {
     }
 
 
-    ledP12() {//lights up P12 then fades P12
+    ledP12() {//lights up P12
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P12, i);
             control.waitMicros(1000)
         }
-        for (let i = 3071; i >= 0; i--) {
+        for (let i = 3071; i >= 0; i--) {//fades P12
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P12, i)
             control.waitMicros(1000)
@@ -75,13 +75,13 @@ class LightUpLED {
     }
 
 
-    ledP16() {//lights up P16 then fades P16
+    ledP16() {//lights up P16
         for (let i = 0; i <= 3071; i++) {
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P16, i);
             control.waitMicros(1000)
         }
-        for (let i = 3071; i >= 0; i--) {
+        for (let i = 3071; i >= 0; i--) {//fades P16
             basic.clearScreen()
             pins.analogWritePin(AnalogPin.P16, i);
             control.waitMicros(1000);
@@ -96,8 +96,8 @@ basic.forever(function () {
     pins.analogWritePin(AnalogPin.P12, 0);
     pins.analogWritePin(AnalogPin.P16, 0);
 
-    //flashes the three leds
-    let light = new LightUpLED;
+    
+    let light = new LightUpLED();
     light.flash();//runs flash function
     light.ledP8();//runs led8 function
     light.ledP12();//runs ledP12

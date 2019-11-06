@@ -8,37 +8,42 @@ class Moisture {
         reading = pins.analogReadPin(AnalogPin.P0);
         pins.digitalWritePin(DigitalPin.P12, 0);
 
-        let i = pins.map(reading, 8, 825, 0, 4);
+        let i = pins.map(reading, 8, 815, 0, 4);
 
         led.plot(0, 4 - i);
         led.plot(1, 4 - i);
         led.plot(2, 4 - i);
         led.plot(3, 4 - i);
         led.plot(4, 4 - i);
-        if (i == 1) {
-            this.ledRow1();
+        if (i > 0 && i < 1) {
+            this.ledRow5();
+            basic.pause(100)
         }
-        if (i == 2) {
-            this.ledRow1();
-            this.ledRow2();
-        }
-        if (i == 3) {
-            this.ledRow1();
-            this.ledRow2();
-            this.ledRow3();
-        }
-        if (i == 4) {
-            this.ledRow1();
-            this.ledRow2();
-            this.ledRow3();
+        if (i > 1 && i < 2) {
+            this.ledRow5();
             this.ledRow4();
+            basic.pause(100)
         }
-        else {
+        if (i > 2 && i < 3) {
+            this.ledRow5();
+            this.ledRow4();
+            this.ledRow3();
+            basic.pause(100)
+        }
+        if (i > 3 && i < 4) {
+            this.ledRow5();
+            this.ledRow4();
+            this.ledRow3();
+            this.ledRow2();
+            basic.pause(100)
+        }
+        if (i > 4) {
             this.ledRow1();
             this.ledRow2();
             this.ledRow3();
             this.ledRow4();
             this.ledRow5();
+            basic.pause(100)
         }
 
     }
@@ -77,11 +82,18 @@ class Moisture {
         led.plot(3, 4);
         led.plot(4, 4);
     }
+    ledRow(r: number): void {
+        led.plot(0, r);
+        led.plot(1, r);
+        led.plot(2, r);
+        led.plot(3, r);
+        led.plot(4, r);
+    }
 }
 
 basic.forever(function () {
 
-    let test = new Moisture
+    let test = new Moisture()
     test.getReading();
     basic.pause(1000);
     basic.clearScreen();

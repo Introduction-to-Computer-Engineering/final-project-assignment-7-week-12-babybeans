@@ -12,11 +12,11 @@ The twenty-eight.js project uses both the leds and the led matrix by using one o
 
 https://imgur.com/gallery/2EqQSKj?s=sms
 
-The digital-in.js file is turned on when the TTL in put button is set to one.
+The digital-in.js file is a program that turns on an LED when the TTL input button is set to one. When the button is not set to one, the LED is turned off.
 https://imgur.com/gallery/0mzwS9l?s=sms
 
-The manual calibration file thing is a ting
-link
+The manual-calibration.js is a moisture meter. The sensor had to be manually calibrated before the program was downloaded. 
+https://imgur.com/gallery/sYzwFEi
 
-the auto thing. 
-link
+The auto-calibration.js is a moisture meter. The sensor asks for a reading in the air (it displays a downward arrow), then a reading in water (it displays an upward arrow). It will ask for three readings of air and water, then it will average the readings and use them to calibrate the sensor. 
+https://imgur.com/gallery/nGFcxjJ

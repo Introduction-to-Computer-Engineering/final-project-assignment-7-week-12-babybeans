@@ -13,7 +13,7 @@ The twenty-eight.js project uses both the leds and the led matrix by using one o
 https://imgur.com/gallery/2EqQSKj?s=sms
 
 The digital-in.js file is turned on when the TTL in put button is set to one.
-Link
+https://imgur.com/gallery/0mzwS9l?s=sms
 
 The manual calibration file thing is a ting
 link

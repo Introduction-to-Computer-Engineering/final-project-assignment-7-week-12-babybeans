@@ -1,33 +1,15 @@
-/*This program flashes the three leds and then each of those
-individual leds slowly light up and then fade out. */
+
 
 
 class LightUpLED {
 
-    flash() {
-        //lights up leds slowly
-        for (let index = 0; index <= 3071; index++) {
-            pins.analogWritePin(AnalogPin.P8, index);
-            pins.analogWritePin(AnalogPin.P12, index);
-            pins.analogWritePin(AnalogPin.P16, index);
-        }
-
-        //fades out leds slowly
-        for (let index = 3071; index >= 0; index--) {
-            pins.analogWritePin(AnalogPin.P8, index);
-            pins.analogWritePin(AnalogPin.P12, index);
-            pins.analogWritePin(AnalogPin.P16, index);
-        }
-    }
-
     ledP8() {
-        //lights led connected to P0 slowly
-        for (let index = 0; index <= 3071; index++) {
+        for (let index = 0; index <= 3071; index++) {//slowly lights led connected to P8
             pins.analogWritePin(AnalogPin.P8, index);
             control.waitMicros(100)
         }
-        //fades led connected to P0 slowly
-        for (let index = 3071; index >= 0; index--) {
+ 
+        for (let index = 3071; index >= 0; index--) {//slowly fades led connected to P8
             pins.analogWritePin(AnalogPin.P8, index);
 
             control.waitMicros(100)
@@ -35,58 +17,54 @@ class LightUpLED {
     }
 
     ledP12() {
-        //lights led connected to P2 slowly
-        for (let index = 0; index <= 3071; index++) {
+        for (let index = 0; index <= 3071; index++) {//slowly lights led  connected to  P12
             pins.analogWritePin(AnalogPin.P12, index)
             control.waitMicros(100)
         }
-        //fades led connected to P2 slowly
-        for (let index = 3071; index >= 0; index--) {
+        for (let index = 3071; index >= 0; index--) {//slowly fades led connected to P12
             pins.analogWritePin(AnalogPin.P12, index)
             control.waitMicros(100)
         }
     }
     ledP16() {
-        //lights led connected to P3 slowly
-        for (let index = 0; index <= 3071; index++) {
+        for (let index = 0; index <= 3071; index++) {//slowly lights led connected to P16
             pins.analogWritePin(AnalogPin.P16, index);
             control.waitMicros(100)
         }
-        //fades led connected to P3 slowly
-        for (let index = 3071; index >= 0; index--) {
+        for (let index = 3071; index >= 0; index--) {//fades led connected to P16 slowly
             pins.analogWritePin(AnalogPin.P16, index);
             control.waitMicros(100)
         }
     }
 
     randomDots() {
-        let y: number = Math.randomRange(0, 4);
-        let x: number = Math.randomRange(0, 4);
-        let b: number = Math.randomRange(0, 3);
+        let y: number = Math.randomRange(0, 4); //sets y axis for led matrix
+        let x: number = Math.randomRange(0, 4);//sets x axis for led matrix
+        let b: number = Math.randomRange(0, 3);//determines if an  external led or an led on the matrix will be displayed
 
-        if (b == 0) {
+        if (b == 0) {//displays dot on led matrix
             for (let i: number = 0; i <= 3071; i += 25) {
                 led.plotBrightness(x, y, i)
             }
             basic.pause(1000);
-            for (let i: number = 0; i >= 0; i -= 25) {
+            for (let i: number = 0; i >= 0; i -= 25) {//fades dot on led matrix
                 led.plotBrightness(x, y, i);
             }
         }
-        if (b == 1) {
+        if (b == 1) {//flashes P8
             this.ledP8();
         }
-        if (b == 2) {
+        if (b == 2) {//flashes P12
             this.ledP12();
         }
-        if (b == 3) {
+        if (b == 3) {//flashes P16
             this.ledP16();
         }
 
 
     }
 
-    resetLED() {
+    resetLED() {//resets the leds to 0 ands clears screen
         pins.analogWritePin(AnalogPin.P8, 0);
         pins.analogWritePin(AnalogPin.P12, 0);
         pins.analogWritePin(AnalogPin.P16, 0);
@@ -99,13 +77,9 @@ class LightUpLED {
 
 
 
-basic.forever(function () {
-    let light = new LightUpLED;
+basic.forever(function () {//runs randomDots function of class LightUpLed continually
+    let light = new LightUpLED;//instanciates the class
     light.resetLED();
-    light.randomDots();
-    light.randomDots();
-    light.randomDots();
-    light.randomDots();
-
+    light.randomDots();//runs random dots
 })
 

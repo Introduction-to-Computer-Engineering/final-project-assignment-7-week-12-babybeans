@@ -11,3 +11,12 @@ https://imgur.com/gallery/hLfdRDu?s=sms
 The twenty-eight.js project uses both the leds and the led matrix by using one of my old screensavers, called randomDots. This screensaver will randomly light either an led on the circuit or an led on the led matrix.
 
 https://imgur.com/gallery/2EqQSKj?s=sms
+
+The digital-in.js file is turned on when the TTL in put button is set to one.
+Link
+
+The manual calibration file thing is a ting
+link
+
+the auto thing. 
+link

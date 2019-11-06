@@ -7,20 +7,23 @@ let averageWater = 0;
 class Moisture {
 
     calibrateAir() {
-        basic.showIcon(IconNames.Heart);
+        basic.showArrow(4);
         pins.digitalWritePin(DigitalPin.P12, 1);
         let air = pins.analogReadPin(AnalogPin.P0);
-        basic.pause(100);
+        basic.pause(2000);
         pins.digitalWritePin(DigitalPin.P12, 0);
         return air;
     }
     calibrateWater() {
-        basic.showString("Water");
+        basic.showArrow(0);
         pins.digitalWritePin(DigitalPin.P12, 1);
         let water = pins.analogReadPin(AnalogPin.P0);
-        basic.pause(100);
+        basic.pause(2000);
         pins.digitalWritePin(DigitalPin.P12, 0);
+        basic.clearScreen();
+        basic.pause(2000);
         return water;
+
     }
     getAverage() {
         let totalAir = 0;
@@ -34,6 +37,7 @@ class Moisture {
 
         averageAir = totalAir / 3;
         averageWater = totalWater / 3;
+
     }
     getReading() {
         pins.digitalWritePin(DigitalPin.P12, 1);
@@ -47,25 +51,26 @@ class Moisture {
         led.plot(2, 4 - i);
         led.plot(3, 4 - i);
         led.plot(4, 4 - i);
-        if (i == 1) {
-            this.ledRow1();
+
+        if (i > 0 && i < 1) {
+            this.ledRow5();
         }
-        if (i == 2) {
-            this.ledRow1();
-            this.ledRow2();
-        }
-        if (i == 3) {
-            this.ledRow1();
-            this.ledRow2();
-            this.ledRow3();
-        }
-        if (i == 4) {
-            this.ledRow1();
-            this.ledRow2();
-            this.ledRow3();
+        if (i > 1 && i < 2) {
+            this.ledRow5();
             this.ledRow4();
         }
-        else {
+        if (i > 2 && i < 3) {
+            this.ledRow5();
+            this.ledRow4();
+            this.ledRow3();
+        }
+        if (i > 4 && i < 5) {
+            this.ledRow5();
+            this.ledRow4();
+            this.ledRow3();
+            this.ledRow2();
+        }
+        if (i > 5) {
             this.ledRow1();
             this.ledRow2();
             this.ledRow3();

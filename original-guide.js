@@ -1,3 +1,5 @@
+//The original program
+
 led.enable(false)
 pins.analogWritePin(AnalogPin.P6, 0)
 pins.analogWritePin(AnalogPin.P8, 0)

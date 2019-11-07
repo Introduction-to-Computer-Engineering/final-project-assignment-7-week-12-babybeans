@@ -1,3 +1,6 @@
+/* This program uses a sensor that is manually calibrated to measure moisture levels. 
+It will display rows on the led matrix to show how much moisture it senses. */
+
 let reading : number = 0;
 
 class Moisture {

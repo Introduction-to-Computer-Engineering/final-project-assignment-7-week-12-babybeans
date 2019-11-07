@@ -29,6 +29,7 @@ https://imgur.com/gallery/2EqQSKj?s=sms
 
 ### Part 4: digital-in.js
 Go to file with this [link](digital-in.js).
+
 The digital-in.js file is a program that turns on an LED when the TTL input button is set to one. When the button is not set 
 to one, the LED is turned off. The following link has the video to the program.
 https://imgur.com/gallery/0mzwS9l?s=sms

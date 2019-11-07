@@ -1,5 +1,6 @@
 
-
+/* This project uses the led matrix and three external leds to run a screensaver. The screensaver will randomly light up 
+either an external led or an led on the matrix, then fade out the external led or the led on the matrix*/
 
 class LightUpLED {
 

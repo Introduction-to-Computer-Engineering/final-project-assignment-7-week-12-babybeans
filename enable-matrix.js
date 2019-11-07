@@ -1,11 +1,10 @@
 /*This program flashes the three leds one at a time, then it flashes all of them at once. 
-While they are all flashing at the same time, there is a firework pattern on the display. */
+When they are all flashing at the same time, there is a firework pattern on the led matrix. */
 
 class LightUpLED {
 
     flash() {
-        //lights up leds slowly
-        for (let index = 0; index <= 3071; index++) {
+        for (let index = 0; index <= 3071; index++) {//slowly lights up the leds
             basic.clearScreen();
 
             pins.analogWritePin(AnalogPin.P8, index);

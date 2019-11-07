@@ -5,7 +5,7 @@ let averageWater: number = 0;
 
 class Moisture {
     
-    constructor(){};
+    constructor(){}; // default constructor
     calibrateAir() { //gets air reading
         basic.showArrow(4);//displays South symbol
         pins.digitalWritePin(DigitalPin.P12, 1);//powers sensor

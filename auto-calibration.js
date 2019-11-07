@@ -1,3 +1,7 @@
+/* This program uses a sensor that is automatically calibrated to measure moisture levels. It will ask for a 
+measurement in air, then a measurement in water. It will repeat this process for a total  of three readings of air
+and water each.It will then take the average of those readings and calibrate the sensor. It will display rows on the 
+led matrix to show how much moisture it senses. */
 
 let reading: number = 0;
 let averageAir: number = 0;

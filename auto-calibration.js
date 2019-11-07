@@ -1,128 +1,73 @@
-led.setBrightness(255)
 
-let reading = 0;
-let averageAir = 0;
-let averageWater = 0;
+let reading: number = 0;
+let averageAir: number = 0;
+let averageWater: number = 0;
 
 class Moisture {
 
-    calibrateAir() {
-        basic.showArrow(4);
-        pins.digitalWritePin(DigitalPin.P12, 1);
-        let air = pins.analogReadPin(AnalogPin.P0);
+    calibrateAir() { //gets air reading
+        basic.showArrow(4);//displays South symbol
+        pins.digitalWritePin(DigitalPin.P12, 1);//powers sensor
+        let air = pins.analogReadPin(AnalogPin.P0);//gets reading from sensor
         basic.pause(2000);
-        pins.digitalWritePin(DigitalPin.P12, 0);
-        return air;
+        pins.digitalWritePin(DigitalPin.P12, 0);//stops power to sensor
+        return air;//returns reading
     }
-    calibrateWater() {
-        basic.showArrow(0);
-        pins.digitalWritePin(DigitalPin.P12, 1);
-        let water = pins.analogReadPin(AnalogPin.P0);
+    calibrateWater() {//gets water reading
+        basic.showArrow(0);//displays North symbol
+        pins.digitalWritePin(DigitalPin.P12, 1);//powers sensor
+        let water = pins.analogReadPin(AnalogPin.P0);//gets reading from sensor
         basic.pause(2000);
-        pins.digitalWritePin(DigitalPin.P12, 0);
+        pins.digitalWritePin(DigitalPin.P12, 0);//stops power to sensor
         basic.clearScreen();
         basic.pause(2000);
-        return water;
+        return water;//returns reading
 
     }
-    getAverage() {
-        let totalAir = 0;
-        let totalWater = 0;
-        totalAir = this.calibrateAir();
-        totalWater = this.calibrateWater();
-        totalAir += this.calibrateAir();
-        totalWater += this.calibrateWater();
-        totalAir += this.calibrateAir();
-        totalWater += this.calibrateWater();
+    getAverage() {//finds average of air and water readings
+        let totalAir : number = 0;
+        let totalWater : number = 0;
+        totalAir = this.calibrateAir();//adds first air reading to air total
+        totalWater = this.calibrateWater();//adds first water reading to water total 
+        totalAir += this.calibrateAir();//adds second air reading to air total
+        totalWater += this.calibrateWater();//adds second water reading to water total
+        totalAir += this.calibrateAir();//adds third  air reading to  air total
+        totalWater += this.calibrateWater();//adds third water reading to water total
 
-        averageAir = totalAir / 3;
-        averageWater = totalWater / 3;
+        averageAir = totalAir / 3;//uses air total and divides by number of air readings
+        averageWater = totalWater / 3;//uses water total and divides by number of water readings
 
     }
     getReading() {
-        pins.digitalWritePin(DigitalPin.P12, 1);
-        reading = pins.analogReadPin(AnalogPin.P0);
-        pins.digitalWritePin(DigitalPin.P12, 0);
+        pins.digitalWritePin(DigitalPin.P12, 1);//powers sensor
+        reading = pins.analogReadPin(AnalogPin.P0);//gets reading from sensor
+        pins.digitalWritePin(DigitalPin.P12, 0);//stops power to sensor
 
-        let i = pins.map(reading, averageAir, averageWater, 0, 4);
-
-        led.plot(0, 4 - i);
-        led.plot(1, 4 - i);
-        led.plot(2, 4 - i);
-        led.plot(3, 4 - i);
-        led.plot(4, 4 - i);
-
-        if (i > 0 && i < 1) {
-            this.ledRow5();
-        }
-        if (i > 1 && i < 2) {
-            this.ledRow5();
-            this.ledRow4();
-        }
-        if (i > 2 && i < 3) {
-            this.ledRow5();
-            this.ledRow4();
-            this.ledRow3();
-        }
-        if (i > 4 && i < 5) {
-            this.ledRow5();
-            this.ledRow4();
-            this.ledRow3();
-            this.ledRow2();
-        }
-        if (i > 5) {
-            this.ledRow1();
-            this.ledRow2();
-            this.ledRow3();
-            this.ledRow4();
-            this.ledRow5();
-        }
-
+        let i = pins.map(reading, averageAir, averageWater, 0, 4);//maps reading in a 0-4 range
+        this.ledRow(i);// calls ledRow 
+        this.fillRows(i);//calls fillRows
     }
-    ledRow1() {
-        led.plot(0, 0);
-        led.plot(1, 0);
-        led.plot(2, 0);
-        led.plot(3, 0);
-        led.plot(4, 0);
+    ledRow(r: number): void {//lights up the led row that corresponds with the reading
+        led.plot(0, 4 - r);
+        led.plot(1, 4 - r);
+        led.plot(2, 4 - r);
+        led.plot(3, 4 - r);
+        led.plot(4, 4 - r);
     }
-    ledRow2() {
-        led.plot(0, 1);
-        led.plot(1, 1);
-        led.plot(2, 1);
-        led.plot(3, 1);
-        led.plot(4, 1);
-    }
-    ledRow3() {
-        led.plot(0, 2);
-        led.plot(1, 2);
-        led.plot(2, 2);
-        led.plot(3, 2);
-        led.plot(4, 2);
-    }
-    ledRow4() {
-        led.plot(0, 3);
-        led.plot(1, 3);
-        led.plot(2, 3);
-        led.plot(3, 3);
-        led.plot(4, 3);
-    }
-    ledRow5() {
-        led.plot(0, 4);
-        led.plot(1, 4);
-        led.plot(2, 4);
-        led.plot(3, 4);
-        led.plot(4, 4);
+    fillRows(r: number): void {//lights up all led rows under the led row that corresponds with the reading
+        for (let i = r; i >= 0; i--) {
+            this.ledRow(i);
+        }
     }
 }
 
 
-let test = new Moisture
-test.getAverage();
-basic.showString("Calibration success");
-basic.forever(function () {
-    test.getReading();
+let test = new Moisture(); //instanciates Moisture class
+test.getAverage();//calls get average
+basic.showString("Calibration success");//sends success message
+basic.forever(function () {//starts a continual loop after calibration is complete
+    test.getReading();//calls get reading
     basic.pause(1000);
-    basic.clearScreen();
+    basic.clearScreen();//clears led matrix
     basic.pause(100);
 })

@@ -2,6 +2,8 @@
 When they are all flashing at the same time, there is a firework pattern on the led matrix. */
 
 class LightUpLED {
+    
+    constructor(){};//default constructor
 
     flash() {
         for (let index = 0; index <= 3071; index++) {//slowly lights up the leds

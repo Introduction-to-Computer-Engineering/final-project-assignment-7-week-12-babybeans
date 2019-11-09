@@ -3,6 +3,8 @@
 either an external led or an led on the matrix, then fade out the external led or the led on the matrix*/
 
 class LightUpLED {
+    
+    constructor(){}; //default conastructor
 
     ledP8() {
         for (let index = 0; index <= 3071; index++) {//slowly lights led connected to P8

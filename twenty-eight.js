@@ -78,11 +78,8 @@ class LightUpLED {
     }
 }
 
-
-
 basic.forever(function () {//runs randomDots function of class LightUpLed continually
     let light = new LightUpLED;//instanciates the class
     light.resetLED();
     light.randomDots();//runs random dots
 })
-
